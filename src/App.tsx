@@ -1,5 +1,5 @@
 //@ts-nocheck
-import './styles/output.css';
+import './styles/tailwind.css';
 import Aboutpage from './components/Aboutpage/Aboutpage';
 import {
   BrowserRouter as Router,

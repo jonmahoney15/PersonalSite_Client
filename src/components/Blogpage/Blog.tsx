@@ -6,7 +6,7 @@ import SkeltonLoader from "./SkeltonLoader";
 interface IPost {
   Title: string;
   Date: string;
-  Description: string;
+  Description: any;
   Image: string 
 }
 

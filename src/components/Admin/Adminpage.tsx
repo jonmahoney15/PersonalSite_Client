@@ -18,19 +18,7 @@ interface IPosts {
 }
  
 const Adminpage = () => {
-    const getPosts = async () => {
-        try {
-            api.defaults.headers.common['x-auth-token'] = sessionStorage.getItem('auth-token');
-            let response = await api.get('/blog/posts');
-            let data = response.data;
-            if( data.items && data.items.length > 0 ){
-                let newPosts: IPosts[] = data.items.map((e: IPosts) => e);
-                setPosts(newPosts); 
-            }
-        } catch(error: Error | any) {
-           setError(error);
-        }
-    }
+    
 
 
     const [posts, setPosts] = useState<IPosts[]>([]);
@@ -41,6 +29,7 @@ const Adminpage = () => {
     const history = useHistory();
     
     useEffect(()=> {
+        console.log(process.env.REACT_APP_LOGIN_STATUS)
         if (((!userData) || (!userData.user) ||
             (userData && userData.user && userData.user !== process.env.REACT_APP_LOGIN_STATUS)) &&
             (sessionStorage.getItem('status') !== process.env.REACT_APP_LOGIN_STATUS))
@@ -48,6 +37,19 @@ const Adminpage = () => {
             history.push('/Login')
         }
         else {
+            const getPosts = async () => {
+                try {
+                    api.defaults.headers.common['x-auth-token'] = sessionStorage.getItem('auth-token');
+                    let response = await api.get('/blog/posts');
+                    let data = response.data;
+                    if( data.items && data.items.length > 0 ){
+                        let newPosts: IPosts[] = data.items.map((e: IPosts) => e);
+                        setPosts(newPosts); 
+                    }
+                } catch(error: Error | any) {
+                   setError(error);
+                }
+            }
             getPosts();
         }
     //eslint-disable-next-line
@@ -97,7 +99,7 @@ const Adminpage = () => {
                                 <th className="px-8 py-4 text-left bg-blue-100 border-none">Image</th>
                                 <th className="px-8 py-4 text-left bg-blue-100 border-none rounded-tr-2xl">Actions</th>
                             </tr>
-                            {posts && posts.length > 0 ? getRows() : <p>{error}</p>}
+                            {posts && posts.length > 0 && getRows()}
                         </tbody>
                     </table>
                 </div>

@@ -1,14 +1,13 @@
-import ReactMarkDown from 'react-markdown';
-import gfm from 'remark-gfm';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface IProps {
     content: string;
-    class?: string;
 }
 
 const MarkdownToHTML = (props: IProps) => {
     return (
-        <ReactMarkDown className="w-full prose" children={props.content} remarkPlugins={[gfm]}/>
+        <ReactMarkdown className="prose" children={props.content} remarkPlugins={[remarkGfm]}/>
     );
 }
 

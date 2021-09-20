@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 interface IPostProps {
   Title: string;
   Image: any;
-  Description: string;
+  Description: any;
   Date: string;
 }
 
@@ -38,7 +38,7 @@ const Post = (props: IPostProps) => {
         <h1 className="flex text-lg text-black md:text-2xl">{props.Title}</h1>
         <p className="flex text-sm text-black">{date}</p>
         <div className="flex w-full overflow-hidden text-base text-transparent h-3/5 bg-clip-text bg-gradient-to-br from-black to-white">
-          <ReactMarkdown className={"text-base"} children={props.Description}/>
+          <ReactMarkdown children={props.Description}/>
         </div> 
         <button onClick={handleClick} className="text-sm text-purple-500 underline md:text-base">Read More</button>
       </div>
