@@ -32,7 +32,7 @@ const CreatePostForm = () => {
             }
         }
 
-        api.post('/blog/createpost', form, config)
+        api.post('/api/blog/createpost', form, config)
             .then(response => setPostResponse(response.data.message))
             .catch(error => console.log(error));
         setFormData(InitialPost); 

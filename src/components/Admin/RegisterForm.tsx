@@ -39,7 +39,7 @@ const RegisterForm = () => {
         }
 
         try {
-            const loginResponse = await api.post('/auth/register', register);
+            const loginResponse = await api.post('/api/auth/register', register);
             setResponse(loginResponse.data.message);
             setAdminData(InitialAdmin);
         } catch(error) {

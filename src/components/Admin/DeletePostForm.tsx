@@ -9,7 +9,7 @@ interface IDeletePostProps {
 const DeletePostForm = (props: IDeletePostProps) => {
     const [res, setRemoveResponse] = useState("");
     const handleSubmit = () => {
-        api.post("/blog/removepost", {"id": props.id})
+        api.post("/api/blog/removepost", {"id": props.id})
             .then((response) => setRemoveResponse(response.data.message))
             .catch(error => console.log(error));
     }

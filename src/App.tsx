@@ -51,7 +51,7 @@ const App = () => {
   useEffect(() => {   
     
     const getToken = async () => {
-      let response = await api.get('/auth/token');
+      let response = await api.get('/api/auth/token');
       setToken(response.data.token); 
     }
 

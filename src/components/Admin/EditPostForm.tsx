@@ -28,7 +28,7 @@ const EditPostForm = (props: IEditProp) => {
             }
         }
 
-        await api.post('/blog/editpost', update)
+        await api.post('/api/blog/editpost', update)
             .then(response => setPostResponse(response.data.message))
             .catch(error => console.log(error));
     }

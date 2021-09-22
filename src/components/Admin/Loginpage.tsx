@@ -37,7 +37,7 @@ const Loginpage = () => {
             HashPassword: loginData.password
         }
 
-        await api.post('/auth/login', login).then(loginResponse => {
+        await api.post('/api/auth/login', login).then(loginResponse => {
             const userStatus = loginResponse?.data?.content?.userStatus;
             const email = loginResponse?.data?.content?.user;
             
