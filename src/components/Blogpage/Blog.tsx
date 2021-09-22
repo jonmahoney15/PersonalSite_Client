@@ -16,7 +16,7 @@ const Blog = () => {
 
   const getPosts = async () => {
       try {
-        let response = await api.get('/blog/posts'); 
+        let response = await api.get('/api/blog/posts'); 
         let data = response.data;
         
         if( data.items && data.items.length > 0 ){

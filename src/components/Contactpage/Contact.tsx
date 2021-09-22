@@ -110,7 +110,7 @@ const Contact = () => {
 
   const handleSubmit = () => {
     
-    api.post("/contact", {
+    api.post("/api/contact/contact", {
         title: "Inquire",
         body: form
       })
