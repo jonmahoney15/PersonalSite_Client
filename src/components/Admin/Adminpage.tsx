@@ -91,6 +91,7 @@ const Adminpage = () => {
                 <h1 className="justify-center text-5xl">Admin Page</h1>
                 <div>
                     <h3 className="flex justify-center m-5 text-3xl">Blog Posts</h3>
+                    { error && error !== "" ? <p className="justify-center text-red-500 text-5xl">{error}</p> : 
                     <table className="shadow-lg">
                         <tbody>
                             <tr>
@@ -101,7 +102,7 @@ const Adminpage = () => {
                             </tr>
                             {posts && posts.length > 0 && getRows()}
                         </tbody>
-                    </table>
+                    </table> }
                 </div>
                 <div>
                     <Modal Title="Register Admin" ButtonTitle="Register Admin" ChildComponent={<RegisterForm />} />
