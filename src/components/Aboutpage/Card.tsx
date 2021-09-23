@@ -14,7 +14,7 @@ const Card = (props: CardProp) => {
           </div>
           <div className="description">
             <div>
-              <p className="text-black w-92 md:w-52">{props.description}</p>
+              <p className="text-black w-92">{props.description}</p>
             </div>
           </div>
       </div>

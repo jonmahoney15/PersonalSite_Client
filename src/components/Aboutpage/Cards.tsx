@@ -29,7 +29,7 @@ const Cards = () => {
     },[]);
 
     return (
-        <div className="flex flex-col items-center md:overflow-hidden md:flex-row justify-evenly">
+        <div className="flex flex-col items-center md:overflow-hidden lg:flex-row justify-evenly">
             {
                 cardData && cardData.length > 0 && 
                 cardData.map((card: ICard, key: number) => <Card key={key} icon={card.Path} altText={card.Name} description={card.Description} />)
