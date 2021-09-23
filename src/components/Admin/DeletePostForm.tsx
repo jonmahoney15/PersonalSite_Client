@@ -1,5 +1,6 @@
 import api from '../../api/api';
 import { useState } from 'react';
+import LoadingWheel from '../Common/LoadingWheel';
 
 interface IDeletePostProps {
     id: string;
@@ -8,15 +9,25 @@ interface IDeletePostProps {
 
 const DeletePostForm = (props: IDeletePostProps) => {
     const [res, setRemoveResponse] = useState("");
-    const handleSubmit = () => {
-        api.post("/api/blog/removepost", {"id": props.id})
-            .then((response) => setRemoveResponse(response.data.message))
-            .catch(error => console.log(error));
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async () => {
+        setLoading(true);
+        await api.post("/api/blog/removepost", {"id": props.id})
+            .then((response) => {
+                setRemoveResponse(response.data.message)
+                setLoading(false);
+            })
+            .catch(error => {
+                console.log(error.message)
+                setLoading(false);
+            });
     }
 
     return (
         <div >
-            {res && res !== "" ? <p>{res}</p> :
+            { loading ? <LoadingWheel/> :
+              res && res !== "" ? <p>{res}</p> :
             <div className="flex flex-col">
                 <p>{props.title}</p>
                 <p>Are you sure you want to delete this blog?</p>

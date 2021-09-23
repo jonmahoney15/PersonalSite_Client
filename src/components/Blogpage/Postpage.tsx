@@ -19,7 +19,7 @@ const Postpage = () => {
     )
   }
 
-  if (location)
+  if ( location )
   {
     let content = location.state.Description;
     let date = new Date(location.state.Date).toLocaleDateString();

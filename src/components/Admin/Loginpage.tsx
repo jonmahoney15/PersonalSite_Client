@@ -3,6 +3,7 @@ import {useHistory} from 'react-router';
 import userContext from '../../context/userContext';
 import api from '../../api/api';
 import useToken from '../Common/useToken';
+import LoadingWheel from '../Common/LoadingWheel';
 interface ILogin {
     email: string;
     password: string;
@@ -21,6 +22,7 @@ const Loginpage = () => {
     const [loginData, setLoginData] = useState<ILogin>(InitialLogin)
     const [res, setRes] = useState("");
     const { setToken } = useToken();
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLoginData(loginData => ({
@@ -31,7 +33,7 @@ const Loginpage = () => {
 
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
-        
+        setLoading(true);    
         const login = {
             Email: loginData.email,
             HashPassword: loginData.password
@@ -46,11 +48,11 @@ const Loginpage = () => {
                 email: email,
                 user: userStatus,
             });
-
+            setLoading(false);
             setToken(loginResponse.data.token);
             sessionStorage.setItem('status', userStatus);
             setLoginData(InitialLogin);
-
+            
             if (userStatus === process.env.REACT_APP_LOGIN_STATUS) {
                 history.push('/Admin');
             }
@@ -59,6 +61,7 @@ const Loginpage = () => {
             console.log(error);
             setRes("There was an error logging in");
             setLoginData(InitialLogin);
+            setLoading(false);
         });
     }        
 
@@ -68,8 +71,9 @@ const Loginpage = () => {
                 <h1 className='mt-4 mb-12 text-2xl font-medium text-center text-primary'>
                     Log in to your account 🔐
                 </h1>
-
+                { loading ? <LoadingWheel/> :
                 <form onSubmit={handleSubmit}>
+                    
                     <div>
                         <label htmlFor='email'>Email</label>
                         <input
@@ -94,17 +98,18 @@ const Loginpage = () => {
                             value={loginData.password}
                         />
                     </div>
-
+                    
                     <div className='flex items-center justify-center mt-6'>
                         <button
+                            disabled={loading}
                             type="submit"
-                            className={`bg-green py-2 px-4 text-sm text-white rounded border border-black focus:outline-none hover:border-green-dark`}
+                            className={`bg-purple-500 py-2 px-4 text-sm text-white rounded border border-black focus:outline-none hover:border-purple-500`}
                         >
                             Login
                         </button>
                     </div>
                     <p className="text-red-800">{res}</p>
-                </form>
+                </form>}
             </div>
         </div>
     );

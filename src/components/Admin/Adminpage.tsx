@@ -7,6 +7,7 @@ import RegisterForm from "./RegisterForm";
 import api from '../../api/api';
 import userContext from "../../context/userContext";
 import {useHistory} from "react-router-dom";
+import LoadingWheel from "../Common/LoadingWheel";
 
 interface IPosts {
     _id: string;
@@ -19,11 +20,9 @@ interface IPosts {
  
 const Adminpage = () => {
     
-
-
     const [posts, setPosts] = useState<IPosts[]>([]);
     const [error, setError] = useState("");
-    
+    const [loading, setLoading] = useState(false); 
     //@ts-ignore
     const { userData } = useContext(userContext);
     const history = useHistory();
@@ -44,12 +43,15 @@ const Adminpage = () => {
                     let data = response.data;
                     if( data.items && data.items.length > 0 ){
                         let newPosts: IPosts[] = data.items.map((e: IPosts) => e);
-                        setPosts(newPosts); 
+                        setPosts(newPosts);
+                        setLoading(false);
                     }
                 } catch(error: Error | any) {
-                   setError(error);
+                    setError(error.message);
+                    setLoading(false);
                 }
             }
+            setLoading(true);
             getPosts();
         }
     //eslint-disable-next-line
@@ -91,7 +93,8 @@ const Adminpage = () => {
                 <h1 className="justify-center text-5xl">Admin Page</h1>
                 <div>
                     <h3 className="flex justify-center m-5 text-3xl">Blog Posts</h3>
-                    { error && error !== "" ? <p className="justify-center text-red-500 text-5xl">{error}</p> : 
+                    { loading ? <LoadingWheel/> :
+                    error && error !== "" ? <p className="justify-center text-red-500 text-5xl">{error}</p> : 
                     <table className="shadow-lg">
                         <tbody>
                             <tr>

@@ -108,31 +108,35 @@ const Contact = () => {
       }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     
-    api.post("/api/contact/contact", {
+    await api.post("/api/contact/contact", {
         title: "Inquire",
         body: form
       })
       .then((response) => {
-        setMessage(response.data);
+        setMessage(response.data.message);
         setFormData(InitialEmail);
         setError(InitialFormErrors);
+      }).catch(error => {
+        console.log(error.message);
       });
   }
 
   return(
     <div className="flex flex-col h-screen">
-      <div className="flex flex-col items-center text-5xl text-white bg-cover bg-gradient-to-b from-black to-purple-500 p-5">
+      <div className="flex flex-col items-center p-5 text-5xl text-white bg-cover bg-gradient-to-b from-black to-purple-500 ">
         <h1>Contact Me</h1>
-        <div className="flex flex-col items-center w-4/5 mt-10 md:w-3/5">
-          <div className="flex flex-col w-full md:flex-row">
+        { message && message !== "" ? 
+          ( <h1 className="flex justify-center m-10 text-5xl text-green-600">{message}</h1> ) :
+        <div className="flex flex-col items-center w-4/5 h-full mt-10 md:w-3/5">
+          <div className="flex flex-col w-full h-full md:flex-row">
             <div className="flex flex-col w-full m-5">
               <label className="text-xl">Email Address:</label>
               <input
                 name="Email"
                 type="email"
-                className="w-full h-16 px-3 py-2 mt-1 text-xl text-black rounded-xl border-grey-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
+                className="w-full h-16 px-3 py-2 m-1 text-xl text-black rounded-xl border-grey-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
                 defaultValue={InitialEmail.Email}
                 value={form.Email}
                 onChange={handleChange}
@@ -143,7 +147,7 @@ const Contact = () => {
               <input 
                 name="Title" 
                 type="text"          
-                className="w-full h-16 px-3 py-2 mt-1 text-xl text-black rounded-xl border-grey-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
+                className="w-full h-16 px-3 py-2 m-1 text-xl text-black rounded-xl border-grey-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
                 defaultValue={InitialEmail.Title}
                 value={form.Title}
                 onChange={handleChange}
@@ -156,7 +160,7 @@ const Contact = () => {
               <input
                 name="FirstName"
                 type="text"
-                className="w-full h-16 px-3 py-2 mt-1 text-xl text-black rounded-xl border-grey-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
+                className="w-full h-16 px-3 py-2 m-1 text-xl text-black rounded-xl border-grey-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
                 defaultValue={InitialEmail.FirstName}
                 value={form.FirstName}
                 onChange={handleChange}
@@ -167,7 +171,7 @@ const Contact = () => {
               <input 
                 name="LastName" 
                 type="text"          
-                className="w-full h-16 px-3 py-2 mt-1 text-xl text-black rounded-xl border-grey-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
+                className="w-full h-16 px-3 py-2 m-1 text-xl text-black rounded-xl border-grey-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
                 defaultValue={InitialEmail.LastName}
                 value={form.LastName}
                 onChange={handleChange}
@@ -184,9 +188,7 @@ const Contact = () => {
               onChange={handleChange} 
               rows={10}></textarea>
           </div>
-          <div className="flex items-center justify-center w-full">
-           { message && message !== "" ? 
-            ( <h1 className="flex justify-center text-3xl">{message}</h1> ) :
+          <div className="flex items-center justify-center w-full m-auto">
               <button 
                 onClick={handleSubmit}
                 disabled={ !(errors.FirstName && errors.LastName && errors.Title && errors.Email && errors.Description) }
@@ -195,9 +197,8 @@ const Contact = () => {
                   'bg-gray'  : 'hover:bg-black hover:text-white'}`}>
                 Submit
               </button>
-            }
           </div>
-        </div>  
+        </div>}  
       </div>
     </div> 
     

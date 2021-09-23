@@ -1,5 +1,6 @@
 import {useState} from "react";
 import api from '../../api/api';
+import LoadingWheel from "../Common/LoadingWheel";
 
 interface IPost {
     _id: string;
@@ -15,10 +16,11 @@ interface IEditProp {
 const EditPostForm = (props: IEditProp) => {
     const [formData, setFormData] = useState<IPost>(props.Post);
     const [response, setPostResponse] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (event: React.SyntheticEvent) => {
         event.preventDefault();
-        
+        setLoading(true);    
         const update = {
             "id": formData._id,
             "post": {
@@ -28,9 +30,13 @@ const EditPostForm = (props: IEditProp) => {
             }
         }
 
-        await api.post('/api/blog/editpost', update)
-            .then(response => setPostResponse(response.data.message))
-            .catch(error => console.log(error));
+        await api.post('/api/blog/editpost', update).then(response => { 
+                setPostResponse(response.data.message)
+                setLoading(false);
+            }).catch(error => {
+                console.log(error.message)
+                setLoading(false)
+            });
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -46,7 +52,8 @@ const EditPostForm = (props: IEditProp) => {
 
     return (
         <div className="flex flex-col bg-gray-300 bg-cover border-gray-500">
-            {response && response !== "" ? <p>{response}</p> : 
+            { loading ? <LoadingWheel/> :
+              response && response !== "" ? <p>{response}</p> : 
             <form encType="multipart/form-data" onSubmit={handleSubmit} className="m-5">
                 <label className="flex flex-col m-5">
                     Title:

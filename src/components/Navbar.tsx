@@ -11,7 +11,7 @@ const Navbar = (props: IImage) => {
 
     return (
         <nav className="flex flex-wrap items-center justify-between p-5 bg-black">
-            <img src={props.icon} alt={props.altText} style={{height: 120}} />
+            <img className="" src={props.icon} alt={props.altText} style={{height: 80}} />
             <div className="flex flex-col md:flex-row top-15 right-10">
                 <div className="flex md:hidden">
                     <button className="relative top-0 right-0 flex" onClick={handleClick}>

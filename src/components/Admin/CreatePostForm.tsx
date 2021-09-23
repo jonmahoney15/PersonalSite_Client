@@ -17,8 +17,8 @@ const CreatePostForm = () => {
 
     const [formData, setFormData] = useState<IPost>(InitialPost);
     const [response, setPostResponse] = useState("");
-
-    const handleSubmit = (event: React.SyntheticEvent) => {
+    const [loading, setLoading] = useState(false);
+    const handleSubmit = async (event: React.SyntheticEvent) => {
         event.preventDefault();
         
         const form = new FormData();
@@ -31,10 +31,15 @@ const CreatePostForm = () => {
                 'content-type': 'multipart/form-data'
             }
         }
-
-        api.post('/api/blog/createpost', form, config)
-            .then(response => setPostResponse(response.data.message))
-            .catch(error => console.log(error));
+        setLoading(true);
+        await api.post('/api/blog/createpost', form, config)
+            .then(response => { 
+                setPostResponse(response.data.message)
+                setLoading(false);
+            }).catch(error => {
+                console.log(error);
+                setLoading(false);
+            });
         setFormData(InitialPost); 
     }
 
@@ -56,7 +61,11 @@ const CreatePostForm = () => {
 
     return (
         <div className="flex flex-col border-gray-500 bg-cover">
-            {response && response !== "" ? <p>{response}</p> : 
+            {loading ? 
+                <div className=" flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+                </div> :
+            response && response !== "" ? <p>{response}</p> : 
             <form encType="multipart/form-data" onSubmit={handleSubmit} className="m-5">
                 <label className="flex flex-col m-5">
                     Title:

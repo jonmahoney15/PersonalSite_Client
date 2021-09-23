@@ -36,12 +36,10 @@ const Blog = () => {
     getPosts();   
   },[]);
 
-
-
   return(
       <div className="flex flex-col items-center h-screen bg-cover bg-gradient-to-b from-black to-purple-500 ">
         { loading ?
-          <div className="flex flex-col">
+        <div className="flex flex-col w-3/4 h-full p-5">
               <SkeltonLoader/>
               <SkeltonLoader/>
               <SkeltonLoader/>
@@ -54,7 +52,7 @@ const Blog = () => {
               Description={post.Description}
               Image={post.Image}
               Date={post.Date}/>)
-          : <h1 className="text-5xl text-white">There are no posts currently.</h1>   
+          : <h1 className="m-5 text-5xl text-white">There are no posts currently.</h1>   
         }
       </div>
   );
