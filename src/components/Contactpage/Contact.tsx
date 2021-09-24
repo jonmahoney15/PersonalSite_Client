@@ -124,7 +124,7 @@ const Contact = () => {
   }
 
   return(
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-purple-500 bg-cover">
       <div className="flex flex-col items-center p-5 text-5xl text-white bg-cover bg-gradient-to-b from-black to-purple-500 ">
         <h1>Contact Me</h1>
         { message && message !== "" ? 
@@ -182,7 +182,7 @@ const Contact = () => {
             <label className="text-xl">What are you inquiring about:</label>
             <textarea 
               name="Description"
-              className="w-full px-3 py-2 text-lg text-gray-700 border rounded-lg focus:outline-none" 
+              className="flex w-full px-3 py-2 text-lg text-gray-700 border rounded-lg focus:outline-none" 
               defaultValue={InitialEmail.Description}
               value={form.Description}
               onChange={handleChange} 

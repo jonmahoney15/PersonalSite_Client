@@ -22,11 +22,16 @@ const Adminpage = () => {
     
     const [posts, setPosts] = useState<IPosts[]>([]);
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
+    const [count, incrementCount] = useState(0);
     //@ts-ignore
     const { userData } = useContext(userContext);
     const history = useHistory();
     
+    const updateOnModalClose = () => {
+        return incrementCount(count + 1);
+    }
+
     useEffect(()=> {
         console.log(process.env.REACT_APP_LOGIN_STATUS)
         if (((!userData) || (!userData.user) ||
@@ -46,7 +51,7 @@ const Adminpage = () => {
                         setPosts(newPosts);
                         setLoading(false);
                     }
-                } catch(error: Error | any) {
+                } catch( error: Error | any ) {
                     setError(error.message);
                     setLoading(false);
                 }
@@ -55,15 +60,15 @@ const Adminpage = () => {
             getPosts();
         }
     //eslint-disable-next-line
-    }, []);
+    }, [count]);
 
     const buttons = (post: IPosts) => {
         return (
             <div>
-                <Modal Title="Delete Post" ButtonTitle="Delete" ChildComponent={
+                <Modal Title="Delete Post" ButtonTitle="Delete" HandleClose={updateOnModalClose} ChildComponent={
                         <DeletePostForm title={post.Title} id={post._id} />       
                 }/>
-                <Modal Title="Edit Post" ButtonTitle="Edit" ChildComponent={
+                <Modal Title="Edit Post" ButtonTitle="Edit" HandleClose={updateOnModalClose} ChildComponent={
                         <EditPostForm Post={post}/> 
                 }/>
             </div>
@@ -77,12 +82,12 @@ const Adminpage = () => {
             //@ts-ignore
             let objImg: string = new Buffer.from(bitmap).toString("base64");
             return (
-            <tr key={key}>
-                <td className="px-8 py-4 text-left border border-gray-100">{post.Title}</td>
-                <td className="px-8 py-4 text-left border border-gray-100">{date}</td>
-                <td className="border border-gray-100"><img className="w-full align-middle max-h-52" src={`data:image/png;base64,${objImg}`} alt={post.Title}></img></td>
-                <td className="px-8 py-4 text-left border border-gray-100">{buttons(post)}</td>
-            </tr>);
+                <tr key={key}>
+                    <td className="px-8 py-4 text-left border border-gray-100">{post.Title}</td>
+                    <td className="px-8 py-4 text-left border border-gray-100">{date}</td>
+                    <td className="border border-gray-100"><img className="w-full align-middle max-h-52" src={`data:image/png;base64,${objImg}`} alt={post.Title}></img></td>
+                    <td className="px-8 py-4 text-left border border-gray-100">{buttons(post)}</td>
+                </tr>);
             })
         return rows;
     }
@@ -94,7 +99,7 @@ const Adminpage = () => {
                 <div>
                     <h3 className="flex justify-center m-5 text-3xl">Blog Posts</h3>
                     { loading ? <LoadingWheel/> :
-                    error && error !== "" ? <p className="justify-center text-red-500 text-5xl">{error}</p> : 
+                    error && error !== "" ? <p className="justify-center text-5xl text-red-500">{error}</p> : 
                     <table className="shadow-lg">
                         <tbody>
                             <tr>
@@ -108,8 +113,8 @@ const Adminpage = () => {
                     </table> }
                 </div>
                 <div>
-                    <Modal Title="Register Admin" ButtonTitle="Register Admin" ChildComponent={<RegisterForm />} />
-                    <Modal Title="Create Blog Post" ButtonTitle="Create Post" ChildComponent={<CreatePostForm />}  />
+                    <Modal Title="Register Admin" ButtonTitle="Register Admin" HandleClose={updateOnModalClose} ChildComponent={<RegisterForm />} />
+                    <Modal Title="Create Blog Post" ButtonTitle="Create Post" HandleClose={ updateOnModalClose } ChildComponent={<CreatePostForm />}  />
                 </div>
             </div>            
         </div>

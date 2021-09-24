@@ -22,8 +22,8 @@ const Navbar = (props: IImage) => {
                         </div>
                     </button>
                 </div>
-                <div className={"md:flex flex-grow items-center bg-purple-501 w-full" + (navbarOpen ? "" : " hidden")}>
-                    <ul className="absolute right-0 flex flex-col mt-5 list-none bg-black rounded top-15 md:top-0 md:flex-row md:ml-auto">
+                <div className={"md:flex flex-grow items-center w-full" + (navbarOpen ? "" : " hidden")}>
+                    <ul className="absolute flex flex-col mt-5 list-none bg-black rounded right-5 md:right-10 top-15 md:top-0 md:flex-row md:ml-auto">
                         <li className="nav-item">  
                             <a href="/" className="block px-3 py-3 text-2xl text-white border-b-2 border-none rounded md:inline-block hover:bg-purple-500">Home</a>
                         </li>

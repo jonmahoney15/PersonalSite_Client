@@ -4,11 +4,11 @@ interface IModalProps {
     Title: string;
     ButtonTitle: string;
     ChildComponent?: ReactNode;
+    HandleClose: () => void;
 }
 
 const Modal = (props: IModalProps) => {
     const [showModal, setShowModal] = useState(false);
-    const reload = () => window.location.reload();
 
     return (
         <>
@@ -47,8 +47,8 @@ const Modal = (props: IModalProps) => {
                         className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase outline-none background-transparent focus:outline-none ease-linear transition-all duration-150"
                         type="button"
                         onClick={() => {
+                          props.HandleClose();
                           setShowModal(false);
-                          reload();
                         }}
                       >
                         Close

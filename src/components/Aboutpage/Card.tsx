@@ -13,8 +13,8 @@ const Card = (props: CardProp) => {
             <img src={props.icon} alt={props.altText} style={{height: 90, width: 90}}/>
           </div>
           <div className="description">
-            <div>
-              <p className="text-black w-92">{props.description}</p>
+            <div className="">
+              <p className="text-2xl text-black w-92">{props.description}</p>
             </div>
           </div>
       </div>

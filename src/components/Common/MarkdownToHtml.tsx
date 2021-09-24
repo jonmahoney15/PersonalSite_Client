@@ -7,7 +7,7 @@ interface IProps {
 
 const MarkdownToHTML = (props: IProps) => {
     return (
-        <ReactMarkdown className="prose" children={props.content} remarkPlugins={[remarkGfm]}/>
+        <ReactMarkdown className="flex flex-col w-full overflow-hidden prose" children={props.content} remarkPlugins={[remarkGfm]}/>
     );
 }
 

@@ -6,8 +6,8 @@ const Bio = () => {
               <img src={process.env.PUBLIC_URL+"/me.png"} alt="Me" className="h-auto max-w-full align-middle border-none rounded-full shadow-lg"/>
             </div>
           </div>
-          <h1 className="justify-center mt-5 text-4xl text-white md:text-5xl lg:text-6xl">Hello World 👋</h1>
-          <p className="justify-center pt-10 text-2xl text-white md:pl-36 md:pr-36 lg:text-3xl">
+          <h1 className="justify-center mt-5 text-5xl text-white md:text-5xl lg:text-6xl">Hello World 👋</h1>
+          <p className="justify-center pt-10 text-3xl text-white md:pl-36 md:pr-36">
             <div className="flex flex-wrap items-center">
               <p> My name is Jonathan Mahoney. I am a Software Engineer.</p> 
             </div>
