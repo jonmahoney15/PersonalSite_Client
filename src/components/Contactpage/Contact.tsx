@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from '../../api/api';
+import LoadingWheel from "../Common/LoadingWheel";
 
 interface IEmailFields {
   FirstName: string;
@@ -38,7 +39,7 @@ const Contact = () => {
   const [form, setFormData] = useState<IEmailFields>(InitialEmail);
   const [message, setMessage] = useState("");
   const [errors, setError] = useState<IFormErrors>(InitialFormErrors)
-
+  const [loading, setLoading] = useState(false);
   const validateForm = (fieldName: string, value: string) => {
     switch(fieldName)
     {
@@ -109,7 +110,7 @@ const Contact = () => {
   };
 
   const handleSubmit = async () => {
-    
+    setLoading(true); 
     await api.post("/api/contact/contact", {
         title: "Inquire",
         body: form
@@ -118,8 +119,10 @@ const Contact = () => {
         setMessage(response.data.message);
         setFormData(InitialEmail);
         setError(InitialFormErrors);
+        setLoading(false);
       }).catch(error => {
-        console.log(error.message);
+        setMessage(error.message);
+        setLoading(false);
       });
   }
 
@@ -127,8 +130,9 @@ const Contact = () => {
     <div className="flex flex-col h-screen bg-purple-500 bg-cover">
       <div className="flex flex-col items-center p-5 text-5xl text-white bg-cover bg-gradient-to-b from-black to-purple-500 ">
         <h1>Contact Me</h1>
-        { message && message !== "" ? 
-          ( <h1 className="flex justify-center m-10 text-5xl text-green-600">{message}</h1> ) :
+    { loading ? <div className="flex items-center justify-center m-28"> <LoadingWheel/> </div>:
+          message && message !== "" ? 
+          ( <h1 className="flex justify-center m-10 text-5xl">{message}</h1> ) :
         <div className="flex flex-col items-center w-4/5 h-full mt-10 md:w-3/5">
           <div className="flex flex-col w-full h-full md:flex-row">
             <div className="flex flex-col w-full m-5">
