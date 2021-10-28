@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { createPopper } from "@popperjs/core";
 
 interface ITooltipProps {
-    color: string;
     Image: string;
     AltText: string;
     Title: string;
@@ -40,9 +39,7 @@ const TooltipImage = (props: ITooltipProps) => {
           <div
             className={
               (tooltipShow ? "" : "hidden ") +
-              "bg-" +
-              props.color +
-              "-600 border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg"
+              "bg-gray-600 border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg"
             }
             //@ts-ignore
             ref={tooltipRef}
@@ -50,9 +47,7 @@ const TooltipImage = (props: ITooltipProps) => {
             <div>
               <div
                 className={
-                  "bg-" +
-                  props.color +
-                  "-600 text-white opacity-75 font-semibold p-3 mb-0 border-b border-solid border-blueGray-100 uppercase rounded-t-lg"
+                  "border-gray-600 text-white opacity-75 font-semibold p-3 mb-0 border-b border-solid border-gray-100 uppercase rounded-t-lg"
                 }
               >
                 {props.Title}
