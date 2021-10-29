@@ -60,7 +60,7 @@ const CreatePostForm = () => {
     };
 
     return (
-        <div className="flex flex-col border-gray-500 bg-cover">
+        <div className="flex flex-col border-gray-500 bg-cover w-full">
             {loading ? 
                 <div className=" flex justify-center items-center">
                   <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
@@ -72,7 +72,7 @@ const CreatePostForm = () => {
                     <input 
                         type="text" 
                         name="Title"
-                        className="text-black text-xl px-3 py-2 mt-1 w-full h-16 rounded-xl border-grey-300 shadow-sm 
+                        className="text-black text-xl px-3 py-2 mt-1 w-full h-16 rounded-xl border shadow-sm 
                         focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
                         value={formData.Title}
                         required
