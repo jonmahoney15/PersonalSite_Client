@@ -2,13 +2,13 @@
     {
         "Id": 0,
         "Name": "Coding",
-        "Description" : "Everyday I strive to learn more. My first programs were in highschool starting with java and Object-Oriented Programming. Now, I am comfortable with frontend and backend development. During my career, I have also done some embedded development  with c++. In the Spring of 2019 I graduated with my B.S. in Computer Science.",
+        "Description" : "Everyday I strive to learn more. My first programs were in highschool starting with java and Object-Oriented Programming. Now, I am comfortable with frontend and backend development. During my career, I have also done some embedded development with C++. In the Spring of 2019 I graduated with my B.S. in Computer Science.",
         "Path": "./svg/code.svg"
     },
     {
         "Id": 1,
         "Name": "Computer",
-        "Description" : "Through countless hours of reading, building and taking apart I continue to learn the inner workings of computer hardware. I have built my own PCs and continue to learn by building my own minature network with multiple raspbery pis and other IoT devices.",
+        "Description" : "Through countless hours of reading, building and taking apart I continue to learn the inner workings of computer hardware. I have built my own PCs and continue to learn by building my own minature network with multiple Raspberry Pis and other IoT devices.",
         "Path": "./svg/Computer.svg"
     },
     {
